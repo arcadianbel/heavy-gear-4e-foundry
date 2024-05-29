@@ -37,7 +37,7 @@
   "packs": [],
   "packFolders": [],
   "socket": false,
-  "manifest": "https://github.com/arcadianbel/heavy-gear-4e-foundry",
+  "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
   "download": "This must link to a .zip file of the current version",
   "background": "systems/heavy-gear-4e/assets/anvil-impact.png",
   "grid.distance": 5,
