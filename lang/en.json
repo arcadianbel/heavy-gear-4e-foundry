@@ -1,5 +1,5 @@
 {
-  "BOILERPLATE": {
+  "HEAVY_GEAR_4E": {
     "Ability": {
       "Str": { "long": "Strength", "abbr": "str" },
       "Con": { "long": "Constitution", "abbr": "con" },
@@ -9,8 +9,8 @@
       "Cha": { "long": "Charisma", "abbr": "cha" }
     },
     "SheetLabels": {
-      "Actor": "Boilerplate Actor Sheet",
-      "Item": "Boilerplate Item Sheet"
+      "Actor": "HeavyGear4e Actor Sheet",
+      "Item": "HeavyGear4e Item Sheet"
     },
     "Item": {
       "Spell": {

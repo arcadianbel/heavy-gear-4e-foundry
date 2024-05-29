@@ -1,14 +1,12 @@
 // Import document classes.
-import { BoilerplateActor } from './documents/actor.mjs';
-import { BoilerplateItem } from './documents/item.mjs';
+import { HeavyGear4eActor } from './documents/actor.mjs';
+import { HeavyGear4eItem } from './documents/item.mjs';
 // Import sheet classes.
-import { BoilerplateActorSheet } from './sheets/actor-sheet.mjs';
-import { BoilerplateItemSheet } from './sheets/item-sheet.mjs';
+import { HeavyGear4eActorSheet } from './sheets/actor-sheet.mjs';
+import { HeavyGear4eItemSheet } from './sheets/item-sheet.mjs';
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
-import { BOILERPLATE } from './helpers/config.mjs';
-// Import DataModel classes
-import * as models from './data/_module.mjs';
+import { HEAVY_GEAR_4E } from './helpers/config.mjs';
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -17,14 +15,14 @@ import * as models from './data/_module.mjs';
 Hooks.once('init', function () {
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
-  game.boilerplate = {
-    BoilerplateActor,
-    BoilerplateItem,
+  game.heavygear4e = {
+    HeavyGear4eActor,
+    HeavyGear4eItem,
     rollItemMacro,
   };
 
   // Add custom constants for configuration.
-  CONFIG.BOILERPLATE = BOILERPLATE;
+  CONFIG.HEAVY_GEAR_4E = HEAVY_GEAR_4E;
 
   /**
    * Set an initiative formula for the system
@@ -35,22 +33,9 @@ Hooks.once('init', function () {
     decimals: 2,
   };
 
-  // Define custom Document and DataModel classes
-  CONFIG.Actor.documentClass = BoilerplateActor;
-
-  // Note that you don't need to declare a DataModel
-  // for the base actor/item classes - they are included
-  // with the Character/NPC as part of super.defineSchema()
-  CONFIG.Actor.dataModels = {
-    character: models.BoilerplateCharacter,
-    npc: models.BoilerplateNPC
-  }
-  CONFIG.Item.documentClass = BoilerplateItem;
-  CONFIG.Item.dataModels = {
-    item: models.BoilerplateItem,
-    feature: models.BoilerplateFeature,
-    spell: models.BoilerplateSpell
-  }
+  // Define custom Document classes
+  CONFIG.Actor.documentClass = HeavyGear4eActor;
+  CONFIG.Item.documentClass = HeavyGear4eItem;
 
   // Active Effects are never copied to the Actor,
   // but will still apply to the Actor from within the Item
@@ -59,14 +44,14 @@ Hooks.once('init', function () {
 
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('boilerplate', BoilerplateActorSheet, {
+  Actors.registerSheet('heavy-gear-4e', HeavyGear4eActorSheet, {
     makeDefault: true,
-    label: 'BOILERPLATE.SheetLabels.Actor',
+    label: 'HEAVY_GEAR_4E.SheetLabels.Actor',
   });
   Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('boilerplate', BoilerplateItemSheet, {
+  Items.registerSheet('heavy-gear-4e', HeavyGear4eItemSheet, {
     makeDefault: true,
-    label: 'BOILERPLATE.SheetLabels.Item',
+    label: 'HEAVY_GEAR_4E.SheetLabels.Item',
   });
 
   // Preload Handlebars templates.
@@ -114,7 +99,7 @@ async function createItemMacro(data, slot) {
   const item = await Item.fromDropData(data);
 
   // Create the macro command using the uuid.
-  const command = `game.boilerplate.rollItemMacro("${data.uuid}");`;
+  const command = `game.heavygear4e.rollItemMacro("${data.uuid}");`;
   let macro = game.macros.find(
     (m) => m.name === item.name && m.command === command
   );
@@ -124,7 +109,7 @@ async function createItemMacro(data, slot) {
       type: 'script',
       img: item.img,
       command: command,
-      flags: { 'boilerplate.itemMacro': true },
+      flags: { 'heavy-gear-4e.itemMacro': true },
     });
   }
   game.user.assignHotbarMacro(macro, slot);
