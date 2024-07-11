@@ -50,7 +50,7 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "spell"],
+    "types": ["item", "feature", "spell","gear"],
     "templates": {
       "base": {
         "description": ""
@@ -68,6 +68,10 @@
     "spell": {
       "templates": ["base"],
       "spellLevel": 1
+    },
+    "gear": {
+      "templates": ["base"],
+      "gearName": 1
     }
   }
 }
